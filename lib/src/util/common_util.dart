@@ -54,7 +54,7 @@ class CommonUtil {
   }
 
   ///  compress file and get file.
-  static Future<File?> compressImage(
+  static Future<XFile?> compressImage(
     File? file, {
     required String targetPath,
     required int minWidth,
