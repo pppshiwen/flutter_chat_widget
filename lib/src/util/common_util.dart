@@ -11,29 +11,29 @@ late String imCachePath;
 
 class CommonUtil {
   /// path: image path
-  static Future<String?> createThumbnail({
-    required String path,
-    required double minWidth,
-    required double minHeight,
-  }) async {
-    if (!(await File(path).exists())) {
-      return null;
-    }
-    String thumbPath = await createTempPath(path, flag: 'im');
-    File destFile = File(thumbPath);
-    if (!(await destFile.exists())) {
-      await destFile.create(recursive: true);
-    } else {
-      return thumbPath;
-    }
-    var compressFile = await compressImage(
-      File(path),
-      targetPath: thumbPath,
-      minHeight: minHeight ~/ 1,
-      minWidth: minWidth ~/ 1,
-    );
-    return compressFile?.path;
-  }
+  // static Future<String?> createThumbnail({
+  //   required String path,
+  //   required double minWidth,
+  //   required double minHeight,
+  // }) async {
+  //   if (!(await File(path).exists())) {
+  //     return null;
+  //   }
+  //   String thumbPath = await createTempPath(path, flag: 'im');
+  //   File destFile = File(thumbPath);
+  //   if (!(await destFile.exists())) {
+  //     await destFile.create(recursive: true);
+  //   } else {
+  //     return thumbPath;
+  //   }
+  //   var compressFile = await compressImage(
+  //     File(path),
+  //     targetPath: thumbPath,
+  //     minHeight: minHeight ~/ 1,
+  //     minWidth: minWidth ~/ 1,
+  //   );
+  //   return compressFile?.path;
+  // }
 
   static Future<String> createTempPath(
     String sourcePath, {
@@ -54,38 +54,38 @@ class CommonUtil {
   }
 
   ///  compress file and get file.
-  static Future<XFile?> compressImage(
-    File? file, {
-    required String targetPath,
-    required int minWidth,
-    required int minHeight,
-  }) async {
-    if (null == file) return null;
-    var path = file.path;
-    var name = path.substring(path.lastIndexOf("/"));
-    // var ext = name.substring(name.lastIndexOf("."));
-    CompressFormat format = CompressFormat.jpeg;
-    if (name.endsWith(".jpg") || name.endsWith(".jpeg")) {
-      format = CompressFormat.jpeg;
-    } else if (name.endsWith(".png")) {
-      format = CompressFormat.png;
-    } else if (name.endsWith(".heic")) {
-      format = CompressFormat.heic;
-    } else if (name.endsWith(".webp")) {
-      format = CompressFormat.webp;
-    }
-
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path,
-      targetPath,
-      quality: 70,
-      inSampleSize: 2,
-      minWidth: minWidth,
-      minHeight: minHeight,
-      format: format,
-    );
-    return result;
-  }
+  // static Future<XFile?> compressImage(
+  //   File? file, {
+  //   required String targetPath,
+  //   required int minWidth,
+  //   required int minHeight,
+  // }) async {
+  //   if (null == file) return null;
+  //   var path = file.path;
+  //   var name = path.substring(path.lastIndexOf("/"));
+  //   // var ext = name.substring(name.lastIndexOf("."));
+  //   CompressFormat format = CompressFormat.jpeg;
+  //   if (name.endsWith(".jpg") || name.endsWith(".jpeg")) {
+  //     format = CompressFormat.jpeg;
+  //   } else if (name.endsWith(".png")) {
+  //     format = CompressFormat.png;
+  //   } else if (name.endsWith(".heic")) {
+  //     format = CompressFormat.heic;
+  //   } else if (name.endsWith(".webp")) {
+  //     format = CompressFormat.webp;
+  //   }
+  //
+  //   var result = await FlutterImageCompress.compressAndGetFile(
+  //     file.absolute.path,
+  //     targetPath,
+  //     quality: 70,
+  //     inSampleSize: 2,
+  //     minWidth: minWidth,
+  //     minHeight: minHeight,
+  //     format: format,
+  //   );
+  //   return result;
+  // }
 
   //fileExt 文件后缀名
   static String? getMediaType(final String filePath) {
